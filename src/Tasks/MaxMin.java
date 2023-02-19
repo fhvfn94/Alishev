@@ -1,53 +1,114 @@
 package Tasks;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class MaxMin {
     public static void main(String[] args) {
-//        Мое решение
-        int[] arr = {12, 14, 13, 9, 4};
-        int max = arr[0];
+        int[] r = {13, 12, 7, 1, 8};
+        int[] evenArray = new int[5];
+//        System.out.println(Arrays.toString(randomArray(evenArray)));
+        int test_array[] = {9,1,7,2,3,4,5,2};
+        removeElement(test_array, 3);
+        System.out.println(Arrays.toString(test_array));
+    }
+
+    //    исключить все  вхождения  числа из массива
+    public static int[] removeElement(int[] arr, int value) {
+        int count = 0;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == value) {
+                count++;
+            } else {
+                arr[i - count] = arr[i];
+            }
+        }
+        return Arrays.copyOf(arr, arr.length - count);
+    }
+    //    Создаем массив с случайными числами
+    public static int[] randomArray(int[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = (int) Math.ceil(Math.random() * 10);
+        }
+        return arr;
+    }
+
+    //    программа, которая выводит на консоль простые числа
+    public static void evenNumbers(int[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] % 2 == 0) {
+                System.out.println(arr[i]);
+            }
+        }
+    }
+
+    //    Первая Сортировка пузырьками
+    public static void bubbleSorting(int[] arr) {
+        int count = 0;
+        int a;
+        for (int j = 0; j < arr.length; j++) {
+//            System.out.println(Arrays.toString(arr));
+            for (int i = 0; i < arr.length - 1; i++) {
+                if (arr[i] > arr[i + 1]) {
+                    a = arr[i];
+                    arr[i] = arr[i + 1];
+                    arr[i + 1] = a;
+                }
+                System.out.println("i " + i + " = " + Arrays.toString(arr));
+            }
+            System.out.println("j " + j + " = " + Arrays.toString(arr));
+        }
+    }
+
+
+    //    Вторая сортировка пузырьками
+    public static void secondBubbleSorting(int[] arr) {
+        int a;
+        int count = 0;
+        boolean status = false;
+//        Цикл будет пока status не равен false
+        while (!status) {
+            count++;
+            status = true;
+            for (int i = 0; i < arr.length - 1; i++) {
+                if (arr[i] > arr[i + 1]) {
+                    status = false;
+                    a = arr[i];
+                    arr[i] = arr[i + 1];
+                    arr[i + 1] = a;
+                    System.out.println("i " + i + " = " + Arrays.toString(arr));
+                }
+            }
+            System.out.println("status" + " = " + status);
+        }
+    }
+
+//    минимальное и максимальное значение
+    public static int min(int[] arr) {
         int min = arr[0];
         for (int i = 0; i < arr.length; i++) {
-            if (max < arr[i]) {
-                max = arr[i];
-            } else if (min > arr[i]) {
+            if (min > arr[i]) {
                 min = arr[i];
             }
         }
-        System.out.println(max);
-        System.out.println(min);
-        int r = 0;
-        int t = 0;
+        return min;
+    }
+    public static int max(int[] arr) {
+        int max = arr[0];
         for (int i = 0; i < arr.length; i++) {
-            r += arr[i];
-            t += i;
-        }
-        r  = r / t;
-        System.out.println(r);
-
-//        Решение
-        int n = 10;
-        double[] ar = new double[n];
-        for (int i = 0; i < ar.length; i++) {
-            ar[i] = Math.random() * 10;
-        }
-        double max1 = ar[0];
-        double min1 = ar[0];
-        for (int i = 0; i < ar.length; i++) {
-            if (max1 < ar[i]) {
-                max1 = ar[i];
-            } else if (min1 > ar[i]) {
-                min1 = ar[i];
+            if (max < arr[i]) {
+                max = arr[i];
             }
         }
-        System.out.println(max1);
-        System.out.println(min1);
-        double r2 = 0;
-        for (int i = 0; i < ar.length; i++) {
-            r2 += ar[i] / ar.length;
-        }
-        System.out.println(r2);
+        return max;
+    }
 
+//    находим среднее значение массива
+    public static int averageValue(int[] arr) {
+        int r = 0;
+        for (int i = 0; i < arr.length; i++) {
+            r += arr[i] / arr.length;
+        }
+        return r;
     }
 }
